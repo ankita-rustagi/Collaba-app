@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 well">
+      <uib-accordion close-others="oneAtATime">
+        <div uib-accordion-group class="panel-default" heading="{{team.name}}" ng-repeat="team in chatCtrl.teams">
+          <!--Create Channel Button-->
+          <button class="btn btn-primary" ng-show="team.teamRole=='team_admin'">Create Channel</button>
+          <div ng-repeat = "channel in chatCtrl.teamChannels[team._id]" ng-click = "chatCtrl.channelClick(channel)" style="cursor:pointer" >
+            <div>{{channel.name}}</div>
+          </div>
+        </div>
+      </uib-accordion>
+    </div>
+    <div class="col-sm-9">
+      <div id="chat">
+        <h1>{{chatCtrl.channelName}}</h1>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Enter message" ng-model="chatCtrl.message" />
+          <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="chatCtrl.sendMessage()">Send</button>
+        </span>
+        </div>
+        <br/>
+        <ul ng-repeat='chat in chatCtrl.chatHistory' class="list-group">
+          <li class="list-group-item"><span class="well">{{chat.sender}}</span>&nbsp;<span class="message"> {{chat.message}}</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
